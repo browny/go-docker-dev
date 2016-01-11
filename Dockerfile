@@ -39,6 +39,9 @@ RUN apt-get update                                                      && \
     apt-get autoremove -y                                               && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# install gcloud sdk
+RUN curl https://sdk.cloud.google.com | bash
+
 USER dev
 ENV HOME /home/dev
 
