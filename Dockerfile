@@ -32,7 +32,7 @@ RUN apt-get update                                                      && \
 # add dev user
     adduser dev --disabled-password --gecos ""                          && \
     echo "ALL            ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers     && \
-    chown -R dev:dev /home/dev /go                                      && \
+    chown -R dev:dev /home/dev /go /var/log                             && \
 # cleanup
     rm -rf /go/src/* /go/pkg                                            && \
     apt-get remove -y ncurses-dev                                       && \
