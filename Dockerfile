@@ -27,7 +27,7 @@ RUN apt-get update                                                      && \
     go get github.com/kisielk/errcheck                                  && \
     go get github.com/jstemmer/gotags                                   && \
     go get github.com/tools/godep                                       && \
-	go get github.com/mjibson/esc                                       && \
+    go get github.com/mjibson/esc                                       && \
     mv /go/bin/* /usr/local/go/bin                                      && \
 # add dev user
     adduser dev --disabled-password --gecos ""                          && \
@@ -47,8 +47,9 @@ RUN mkdir -p ~/.vim/bundle                                              && \
     cd  ~/.vim/bundle                                                   && \
     git clone --depth 1 https://github.com/gmarik/Vundle.vim.git        && \
     git clone --depth 1 https://github.com/fatih/vim-go.git             && \
-	git clone --depth 1 https://github.com/kien/ctrlp.vim               && \
-	git clone --depth 1 https://github.com/fholgado/minibufexpl.vim     && \
+    git clone --depth 1 https://github.com/kien/ctrlp.vim               && \
+    git clone --depth 1 https://github.com/fholgado/minibufexpl.vim     && \
+    git clone --depth 1 https://github.com/tpope/vim-fugitive           && \
     vim +PluginInstall +qall                                            && \
 # cleanup
-    rm -rf Vundle.vim/.git vim-go/.git kien/ctrlp.vim/.git fholgado/minibufexpl.vim/.git
+    rm -rf Vundle.vim/.git vim-go/.git kien/ctrlp.vim/.git fholgado/minibufexpl.vim/.git tpope/vim-fugitive/.git

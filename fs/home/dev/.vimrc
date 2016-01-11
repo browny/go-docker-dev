@@ -12,6 +12,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'fatih/vim-go'
 Plugin 'kien/ctrlp.vim'
 Plugin 'fholgado/minibufexpl.vim'
+Plugin 'tpope/vim-fugitive'
 
 " all of your Plugins must be added before the following line
 call vundle#end()            " required
