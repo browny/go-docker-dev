@@ -1,4 +1,4 @@
-FROM golang:wheezy
+FROM golang:1.5.2
 MAINTAINER Michele Bertasi
 
 ADD fs/ /
@@ -26,6 +26,8 @@ RUN apt-get update                                                      && \
     go get github.com/golang/lint/golint                                && \
     go get github.com/kisielk/errcheck                                  && \
     go get github.com/jstemmer/gotags                                   && \
+    go get github.com/tools/godep                                       && \
+	go get github.com/mjibson/esc                                       && \
     mv /go/bin/* /usr/local/go/bin                                      && \
 # add dev user
     adduser dev --disabled-password --gecos ""                          && \
@@ -45,18 +47,8 @@ RUN mkdir -p ~/.vim/bundle                                              && \
     cd  ~/.vim/bundle                                                   && \
     git clone --depth 1 https://github.com/gmarik/Vundle.vim.git        && \
     git clone --depth 1 https://github.com/fatih/vim-go.git             && \
-    git clone --depth 1 https://github.com/majutsushi/tagbar.git        && \
-    git clone --depth 1 https://github.com/Shougo/neocomplete.vim.git   && \
-    git clone --depth 1 https://github.com/scrooloose/nerdtree.git      && \
-    git clone --depth 1 https://github.com/bling/vim-airline.git        && \
-    git clone --depth 1 https://github.com/tpope/vim-fugitive.git       && \
-    git clone --depth 1 https://github.com/jistr/vim-nerdtree-tabs.git  && \
-    git clone --depth 1 https://github.com/mbbill/undotree.git          && \
-    git clone --depth 1 https://github.com/Lokaltog/vim-easymotion.git  && \
-    git clone --depth 1 https://github.com/scrooloose/nerdcommenter.git && \
+	git clone --depth 1 https://github.com/kien/ctrlp.vim               && \
+	git clone --depth 1 https://github.com/fholgado/minibufexpl.vim     && \
     vim +PluginInstall +qall                                            && \
 # cleanup
-    rm -rf Vundle.vim/.git vim-go/.git tagbar/.git neocomplete.vim/.git    \
-        nerdtree/.git vim-airline/.git vim-fugitive/.git                   \
-        vim-nerdtree-tabs/.git undotree/.git vim-easymotion/.git           \
-        nerdcommenter/.git
+    rm -rf Vundle.vim/.git vim-go/.git kien/ctrlp.vim/.git fholgado/minibufexpl.vim/.git
