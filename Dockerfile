@@ -5,7 +5,7 @@ ADD fs/ /
 
 # install pagkages
 RUN apt-get update                                                      && \
-    apt-get install -y ncurses-dev libtolua-dev exuberant-ctags         && \
+    apt-get install -y ncurses-dev libtolua-dev exuberant-ctags unzip   && \
     ln -s /usr/include/lua5.2/ /usr/include/lua                         && \
     ln -s /usr/lib/x86_64-linux-gnu/liblua5.2.so /usr/lib/liblua.so     && \
     cd /tmp                                                             && \
@@ -40,7 +40,12 @@ RUN apt-get update                                                      && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # install gcloud sdk
-RUN curl https://sdk.cloud.google.com | bash
+ENV CLOUDSDK_PYTHON_SITEPACKAGES 1
+RUN wget https://dl.google.com/dl/cloudsdk/channels/rapid/google-cloud-sdk.zip && unzip google-cloud-sdk.zip && rm google-cloud-sdk.zip
+RUN google-cloud-sdk/install.sh --usage-reporting=true --path-update=true --bash-completion=true --rc-path=/.bashrc --additional-components app-engine-java app-engine-python app kubectl alpha beta
+# disable updater check for the whole installation.
+RUN google-cloud-sdk/bin/gcloud config set --installation component_manager/disable_update_check true
+ENV PATH /go/google-cloud-sdk/bin:$PATH
 
 USER dev
 ENV HOME /home/dev
