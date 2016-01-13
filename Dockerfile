@@ -5,14 +5,12 @@ ADD fs/ /
 
 # install pagkages
 RUN apt-get update                                                      && \
-    apt-get install -y ncurses-dev libtolua-dev exuberant-ctags unzip   && \
-    ln -s /usr/include/lua5.2/ /usr/include/lua                         && \
-    ln -s /usr/lib/x86_64-linux-gnu/liblua5.2.so /usr/lib/liblua.so     && \
+    apt-get install -y ncurses-dev exuberant-ctags unzip                && \
     cd /tmp                                                             && \
 # build and install vim
     git clone https://github.com/vim/vim.git                            && \
     cd vim                                                              && \
-    ./configure --with-features=huge --enable-luainterp                    \
+    ./configure --with-features=huge                                       \
         --enable-gui=no --without-x --prefix=/usr                       && \
     make VIMRUNTIMEDIR=/usr/share/vim/vim74                             && \
     make install                                                        && \
@@ -29,18 +27,11 @@ RUN apt-get update                                                      && \
     go get github.com/tools/godep                                       && \
     go get github.com/mjibson/esc                                       && \
     mv /go/bin/* /usr/local/go/bin                                      && \
-# add dev user
-    adduser dev --disabled-password --gecos ""                          && \
-    echo "ALL            ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers     && \
-    chown -R dev:dev /home/dev /go /var/log                             && \
 # cleanup
     rm -rf /go/src/* /go/pkg                                            && \
     apt-get remove -y ncurses-dev                                       && \
     apt-get autoremove -y                                               && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-USER dev
-ENV HOME /home/dev
 
 # install vim plugins
 RUN mkdir -p ~/.vim/bundle                                              && \
