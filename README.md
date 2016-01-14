@@ -17,8 +17,7 @@ docker run --rm -tiv `pwd`:/go browny/go-docker-dev
 
 ## Others 
 Some utility tools are also installed:
-
-* [gcloud sdk](https://cloud.google.com/sdk/) is also installed
+* [tmux](https://tmux.github.io/)
 
 ## Limitations
 

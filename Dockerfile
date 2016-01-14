@@ -27,11 +27,23 @@ RUN apt-get update                                                      && \
     go get github.com/tools/godep                                       && \
     go get github.com/mjibson/esc                                       && \
     mv /go/bin/* /usr/local/go/bin                                      && \
+	# add dev user
+    adduser dev --disabled-password --gecos ""                          && \
+    echo "ALL            ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers     && \
+    chown -R dev:dev /home/dev /go /var/log                             && \
 # cleanup
     rm -rf /go/src/* /go/pkg                                            && \
     apt-get remove -y ncurses-dev                                       && \
     apt-get autoremove -y                                               && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# install tmux
+RUN echo "deb http://archive.ubuntu.com/ubuntu/ precise main universe" >> /etc/apt/sources.list
+RUN apt-get -q -y update
+RUN apt-get install -y tmux
+
+USER dev
+ENV HOME /home/dev
 
 # install vim plugins
 RUN mkdir -p ~/.vim/bundle                                              && \

@@ -52,7 +52,9 @@ set tabstop=4
 "set expandtab
 set timeoutlen=500
 set ttimeoutlen=0
-colorscheme molokai
+colorscheme seoul256
+let g:seoul256_background = 233
+set t_Co=256
 
 let mapleader = ","
 
