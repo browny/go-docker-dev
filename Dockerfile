@@ -5,7 +5,7 @@ ADD fs/ /
 
 # install pagkages
 RUN apt-get update                                                      && \
-    apt-get install -y ncurses-dev exuberant-ctags unzip                && \
+    apt-get install -y ncurses-dev exuberant-ctags unzip sudo           && \
     cd /tmp                                                             && \
 # build and install vim
     git clone https://github.com/vim/vim.git                            && \
