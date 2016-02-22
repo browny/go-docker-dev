@@ -26,6 +26,7 @@ RUN apt-get update                                                      && \
     go get github.com/jstemmer/gotags                                   && \
     go get github.com/tools/godep                                       && \
     go get github.com/mjibson/esc                                       && \
+	go get github.com/stretchr/testify                                  && \
     mv /go/bin/* /usr/local/go/bin                                      && \
 	# add dev user
     adduser dev --disabled-password --gecos ""                          && \
