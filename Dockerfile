@@ -1,4 +1,4 @@
-FROM golang:1.5.2
+FROM golang:1.6.0
 MAINTAINER Michele Bertasi
 
 ADD fs/ /
