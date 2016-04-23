@@ -16,7 +16,6 @@ RUN apt-get update                                                      && \
     make install                                                        && \
 # get go tools
     go get golang.org/x/tools/cmd/godoc                                 && \
-	go get github.com/stretchr/testify                                  && \
     go get github.com/nsf/gocode                                        && \
     go get golang.org/x/tools/cmd/goimports                             && \
     go get github.com/rogpeppe/godef                                    && \
@@ -37,6 +36,8 @@ RUN apt-get update                                                      && \
     apt-get remove -y ncurses-dev                                       && \
     apt-get autoremove -y                                               && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+Run go get github.com/stretchr/testify
 
 # install tmux
 RUN echo "deb http://archive.ubuntu.com/ubuntu/ precise main universe" >> /etc/apt/sources.list
