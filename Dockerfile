@@ -1,5 +1,5 @@
-FROM golang:1.6.0
-MAINTAINER Michele Bertasi
+FROM golang:1.6.2
+MAINTAINER Browny Lin
 
 ADD fs/ /
 
@@ -16,6 +16,7 @@ RUN apt-get update                                                      && \
     make install                                                        && \
 # get go tools
     go get golang.org/x/tools/cmd/godoc                                 && \
+	go get github.com/stretchr/testify                                  && \
     go get github.com/nsf/gocode                                        && \
     go get golang.org/x/tools/cmd/goimports                             && \
     go get github.com/rogpeppe/godef                                    && \
